@@ -9,19 +9,19 @@
 <body>
 <form action="reg" method="post">
 	<p>
-	<input type="text" name="userid" value="${userid }"/>
+	<input type="text" name="userid" value="${userid }"/>${errorMessageUserid }
 	</p>
 	<p>
-	<input type="text" name="password" value="${password }"/>
+	<input type="text" name="password" value="${password }"/> ${errorMessagePassword }
 	</p>
 	<p>
-	<input type="text" name="password2" value="${password2 }"/>
+	<input type="text" name="password2" value="${password2 }"/>${errorMessagePasswordNotMatch }
 	</p>
 	<p>
-	<input type="text" name="email" value="${email }"/>
+	<input type="text" name="email" value="${email }"/>${errorMessageEmail }
 	</p>
 	<input type="submit" value="註冊">
-	${errorMessage }
+	
 </form>
 </body>
 </html>
