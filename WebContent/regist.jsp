@@ -9,16 +9,16 @@
 <body>
 <form action="reg" method="post">
 	<p>
-	<input type="text" name="userid" value="${userid }"/>${errorMessageUserid }
+	<input type="text" name="userid" value="${member.userid }"/>${member.errorUserid }
 	</p>
 	<p>
-	<input type="text" name="password" value="${password }"/> ${errorMessagePassword }
+	<input type="text" name="password" value="${member.password }"/> ${member.errorPassword }
 	</p>
 	<p>
-	<input type="text" name="password2" value="${password2 }"/>${errorMessagePasswordNotMatch }
+	<input type="text" name="password2" value="${member.password2 }"/>${member.errorPasswordNotMatch }
 	</p>
 	<p>
-	<input type="text" name="email" value="${email }"/>${errorMessageEmail }
+	<input type="text" name="email" value="${member.email }"/>${member.errorEmail }
 	</p>
 	<input type="submit" value="註冊">
 	

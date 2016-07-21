@@ -38,45 +38,22 @@ public class RegistServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
 		String email = request.getParameter("email");
-		boolean errorUserid = false;
-		boolean errorPassword = false;
-		boolean errorPasswordNotMatch = false;
-		boolean errorEmail = false;
-		
-		if (userid.length()<4 || userid.length()>20){
-			errorUserid = true;
-		}
-		if (password.length()<6 || password.length()>20){
-			errorPassword = true;
-		}
-		if (!password.equals(password2)){
-			errorPasswordNotMatch = true;
-			password2 = "";
-		}
-		if (email.indexOf("@")==-1){
-			errorEmail = true;
-		}
-		if (errorUserid || errorPassword || errorPasswordNotMatch || errorEmail){
-			if (errorUserid){
-				request.getSession().setAttribute("errorMessageUserid", "帳號長度錯誤(4-20)");
-			}
-			if (errorPassword){
-				request.getSession().setAttribute("errorMessagePassword", "密碼長度錯誤(6-20)");
-			}
-			if (errorPasswordNotMatch){
-				request.getSession().setAttribute("errorMessagePasswordNotMatch", "兩組密碼不相同");
-			}
-			if (errorEmail){
-				request.getSession().setAttribute("errorEmail", "Email格式錯誤");
-			}
-			request.getSession().setAttribute("userid", userid);
-			request.getSession().setAttribute("password", password);
-			request.getSession().setAttribute("password2", password2);
-			request.getSession().setAttribute("email", email);
-			response.sendRedirect("regist.jsp");
-		}else{
+		Member member = new Member(userid, password, password2, email);
+		if (member.validate()){
 			response.getWriter().println("註冊成功");
+		}else{
+			//
+			request.getSession().setAttribute("member", member);
+			response.sendRedirect("regist.jsp");
 		}
 	}
 
 }
+
+
+
+
+
+
+
+
