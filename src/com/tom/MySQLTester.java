@@ -24,7 +24,6 @@ public class MySQLTester {
 				System.out.println(id+"/"+userid+"/"+passwd+"/"+email);
 			}
 			
-			
 			conn.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
