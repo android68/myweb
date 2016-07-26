@@ -16,6 +16,13 @@ public class MySQLTester {
 					"jdbc:mysql://j.snpy.org/a105?user=a105&password=a105.33");
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from users");
+			while(rs.next()){
+				int id = rs.getInt("id");
+				String userid = rs.getString("userid");
+				String passwd = rs.getString("passwd");
+				String email = rs.getString("email");
+				System.out.println(id+"/"+userid+"/"+passwd+"/"+email);
+			}
 			
 			
 			conn.close();
