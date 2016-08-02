@@ -2,6 +2,7 @@ package com.tom;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -85,11 +86,12 @@ public class Member {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager
 						.getConnection("jdbc:mysql://j.snpy.org/a105?user=a105&password=a105.33");
-				Statement stmt = conn.createStatement();
-				String insert = "INSERT INTO users(userid,passwd,email)" +
-						" VALUES('"+userid+"','"+password+"','"+email+"')";
-				System.out.println(insert);
-				int rowCount = stmt.executeUpdate(insert);
+				PreparedStatement pstmt = conn.prepareStatement(
+						"INSERT INTO users(userid,passwd,email) VALUES(?,?,?)");
+				pstmt.setString(1, userid);
+				pstmt.setString(2, password);
+				pstmt.setString(3, email);
+				int rowCount = pstmt.executeUpdate();
 				System.out.println("rowCount:"+rowCount);
 				
 				conn.close();

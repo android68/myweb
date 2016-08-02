@@ -40,6 +40,7 @@ public class RegistServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		Member member = new Member(userid, password, password2, email);
 		if (member.validate()){
+			
 			response.getWriter().println("註冊成功");
 		}else{
 			//
