@@ -53,7 +53,14 @@ public class MemberTest {
 		
 	}
 	@Test
-	public void testLogin() {
-		fail("Not yet implemented");
+	public void testLoginSuccess() {
+		Member m = new Member("jack", "123456");
+		assertTrue(m.login());
+		
+	}
+	@Test
+	public void testLoginFail() {
+		Member m = new Member("jack", "13989485");
+		assertFalse(m.login());
 	}
 }
