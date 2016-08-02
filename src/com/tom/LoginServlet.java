@@ -42,29 +42,15 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userid = request.getParameter("userid");
 		String passwd = request.getParameter("password");
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = 
-					DriverManager.getConnection(
-					"jdbc:mysql://j.snpy.org/a105?user=a105&password=a105.33");
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from users where userid='"+userid+"' and passwd='"+passwd+"'");
-			if (rs.next()){
-				response.getWriter().println("Login Success");
-			}else{
-				request.getSession().setAttribute("error", "您登入失敗");
-				request.getSession().setAttribute("userid", userid);
-				request.getSession().setAttribute("passwd", passwd);
-				response.sendRedirect("login.jsp");
-			}
-			conn.close();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Member m = new Member(userid, passwd);
+		if (m.login()){
+			response.getWriter().println("Login Success");
+
+		}else{
+			request.getSession().setAttribute("error", "您登入失敗");
+			request.getSession().setAttribute("userid", userid);
+			request.getSession().setAttribute("passwd", passwd);
+			response.sendRedirect("login.jsp");
 		}
 	}
 

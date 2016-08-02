@@ -29,6 +29,11 @@ public class Member {
 		this.email = email;
 	}
 
+	public Member(String userid, String passwd) {
+		this.userid = userid;
+		this.password = passwd;
+	}
+
 	public String getUserid() {
 		return userid;
 	}
@@ -138,6 +143,30 @@ public class Member {
 
 	public void setErrorEmail(String errorEmail) {
 		this.errorEmail = errorEmail;
+	}
+
+	public boolean login() {
+		boolean logon = false;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = 
+					DriverManager.getConnection(
+					"jdbc:mysql://j.snpy.org/a105?user=a105&password=a105.33");
+			PreparedStatement pstmt = conn.prepareStatement(
+					"select * from users where userid=? and passwd=?");
+			pstmt.setString(1, userid);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			logon = rs.next();
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return logon;
 	}
 
 }

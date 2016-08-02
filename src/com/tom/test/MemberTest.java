@@ -26,7 +26,7 @@ public class MemberTest {
 
 	@Test
 	public void testRegist() {
-		Member m = new Member("william", "1122", "112233", "will@com.tw");
+		Member m = new Member("william", "112233", "112233", "will@com.tw");
 		boolean validated = m.validate();
 		assertTrue(validated);
 		try {
