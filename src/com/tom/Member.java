@@ -108,13 +108,14 @@ public class Member {
 				
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager
-						.getConnection("jdbc:mysql://j.snpy.org/a105?user=a105&password=a105.33");
+						.getConnection("jdbc:mysql://j.snpy.org/a105?user=a105&password=a105.33&userUnicode=true&characterEncoding=UTF-8");
 				PreparedStatement pstmt = conn.prepareStatement(
-						"INSERT INTO users(userid,passwd,email,vid) VALUES(?,?,?,?)");
+						"INSERT INTO users(userid,passwd,email,nickname,vid) VALUES(?,?,?,?,?)");
 				pstmt.setString(1, userid);
 				pstmt.setString(2, password);
 				pstmt.setString(3, email);
-				pstmt.setString(4, vid);
+				pstmt.setString(4, nickname);
+				pstmt.setString(5, vid);
 				int rowCount = pstmt.executeUpdate();
 				System.out.println("rowCount:"+rowCount);
 				

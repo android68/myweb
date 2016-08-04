@@ -8,20 +8,24 @@
 </head>
 <body>
 <form action="reg" method="post">
-	<p>
+	<p>帳號:
 	<input type="text" name="userid" value="${member.userid }"/>${member.errorUserid }
 	</p>
-	<p>
+	
+	<p>密碼:
 	<input type="text" name="password" value="${member.password }"/> ${member.errorPassword }
 	</p>
-	<p>
+	
+	<p>密碼(請再輸入一次):
 	<input type="text" name="password2" value="${member.password2 }"/>${member.errorPasswordNotMatch }
 	</p>
-	<p>
+	
+	<p>E-mail:
 	<input type="text" name="email" value="${member.email }"/>${member.errorEmail }
 	</p>
-	<p>
-	<input type="text" name="nickname" value="${member.nickname }"/>${member.errorEmail }
+	
+	<p>匿稱:
+	<input type="text" name="nickname" value="${member.nickname }"/>
 	</p>
 	<input type="submit" value="註冊">
 	

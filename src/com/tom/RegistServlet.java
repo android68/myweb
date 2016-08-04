@@ -40,7 +40,7 @@ public class RegistServlet extends HttpServlet {
 		String password2 = request.getParameter("password2");
 		String email = request.getParameter("email");
 		String nickname = request.getParameter("nickname");
-		System.out.println(nickname);
+//		System.out.println(nickname);
 		
 		Member member = new Member(userid, password, password2, email, nickname);
 		if (member.validate()){
