@@ -6,12 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 public class Member {
 	String userid;
 	String password;
 	String password2;
 	String email;
+	String nickname;
 	String errorUserid;
 	String errorPassword;
 	String errorPasswordNotMatch;
@@ -20,6 +22,17 @@ public class Member {
 	public Member() {
 
 	}
+
+	
+	public Member(String userid, String password, String password2, String email, String nickname) {
+		super();
+		this.userid = userid;
+		this.password = password;
+		this.password2 = password2;
+		this.email = email;
+		this.nickname = nickname;
+	}
+
 
 	public Member(String userid, String password, String password2, String email) {
 		super();
@@ -87,15 +100,21 @@ public class Member {
 		if (error) {
 			return false;
 		} else {
+			
+			String vid = null;
 			try {
+				Date now = new Date();
+				vid = String.valueOf(now.getTime());
+				
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager
 						.getConnection("jdbc:mysql://j.snpy.org/a105?user=a105&password=a105.33");
 				PreparedStatement pstmt = conn.prepareStatement(
-						"INSERT INTO users(userid,passwd,email) VALUES(?,?,?)");
+						"INSERT INTO users(userid,passwd,email,vid) VALUES(?,?,?,?)");
 				pstmt.setString(1, userid);
 				pstmt.setString(2, password);
 				pstmt.setString(3, email);
+				pstmt.setString(4, vid);
 				int rowCount = pstmt.executeUpdate();
 				System.out.println("rowCount:"+rowCount);
 				
@@ -108,6 +127,9 @@ public class Member {
 				e.printStackTrace();
 			}
 
+			
+			
+			
 			return true;
 		}
 
@@ -169,4 +191,16 @@ public class Member {
 		return logon;
 	}
 
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	
+	
 }

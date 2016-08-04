@@ -20,6 +20,9 @@
 	<p>
 	<input type="text" name="email" value="${member.email }"/>${member.errorEmail }
 	</p>
+	<p>
+	<input type="text" name="nickname" value="${member.nickname }"/>${member.errorEmail }
+	</p>
 	<input type="submit" value="註冊">
 	
 </form>
