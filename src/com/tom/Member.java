@@ -108,7 +108,9 @@ public class Member {
 				
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager
-						.getConnection("jdbc:mysql://j.snpy.org/a105?user=a105&password=a105.33&userUnicode=true&characterEncoding=UTF-8");
+						.getConnection("jdbc:mysql://j.snpy.org/a105?"
+								+ "user=a105&password=a105.33&"
+								+ "useUnicode=true&characterEncoding=UTF-8");
 				PreparedStatement pstmt = conn.prepareStatement(
 						"INSERT INTO users(userid,passwd,email,nickname,vid) VALUES(?,?,?,?,?)");
 				pstmt.setString(1, userid);
