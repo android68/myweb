@@ -1,5 +1,8 @@
 package com.tom;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -114,7 +117,7 @@ public class Member {
 				PreparedStatement pstmt = conn.prepareStatement(
 						"INSERT INTO users(userid,passwd,email,nickname,vid) VALUES(?,?,?,?,?)");
 				pstmt.setString(1, userid);
-				pstmt.setString(2, password);
+				pstmt.setString(2, getMD5(password));
 				pstmt.setString(3, email);
 				pstmt.setString(4, nickname);
 				pstmt.setString(5, vid);
@@ -180,7 +183,7 @@ public class Member {
 			PreparedStatement pstmt = conn.prepareStatement(
 					"select * from users where userid=? and passwd=?");
 			pstmt.setString(1, userid);
-			pstmt.setString(2, password);
+			pstmt.setString(2, getMD5(password));
 			ResultSet rs = pstmt.executeQuery();
 			logon = rs.next();
 			conn.close();
@@ -204,6 +207,18 @@ public class Member {
 		this.nickname = nickname;
 	}
 
-	
+	public String getMD5(String pw){
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] bb = md.digest(pw.getBytes());
+			BigInteger bi = new BigInteger(1, bb);
+			System.out.println(bi.toString(16));
+			return bi.toString(16);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }
